@@ -1,12 +1,13 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
-const geocode = require('./utilis/geocode')
-const forecast = require('./utilis/forecast')
+const geocode = require('./utilis/geocode.js')
+const forecast = require('./utilis/forecast.js')
 
 
 //to store our express app(server)
 const app = express()
+const port = process.env.PORT || 3000
 
 //define paths for express config
 const publicPath = path.join(__dirname, '../public')
@@ -83,6 +84,6 @@ app.get('*', (req, res) => {
       msg: 'My 404 page'
    })
 })
-app.listen(3000, () => {         //to start the port
-   console.log('The server is started in port 3000!')
+app.listen(port, () => {         //to start the port
+   console.log('The server is started in port' + port)
 })
