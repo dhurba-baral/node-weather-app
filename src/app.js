@@ -45,8 +45,8 @@ app.get('/help', (req, res) => {
 })
 app.get('/weather', (req, res) => {   //tells what the server should do when someone tries to get into specific url
    if (!req.query.address) {
-      res.send({
-         error1: 'You must provide an address.'
+      return res.send({
+         error: 'You must provide an address.'
       })
    }
    geocode(req.query.address, (error, { lattitude, longitude, location } = {}) => {
@@ -59,11 +59,10 @@ app.get('/weather', (req, res) => {   //tells what the server should do when som
       forecast(longitude, lattitude, (error, forecastData) => {
          if (error) {
             //return console.log(error)
-            res.send({
+            return res.send({
                error
             })
          }
-         //console.log(forecastData)
          res.send({
             address: req.query.address,
             forecast: forecastData,
